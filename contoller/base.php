@@ -5,7 +5,7 @@ class baseController {
     public $controller = "";
     public $action = "";
 
-    protected function Page($MODEL, $action = "", $controller = "", $layout = "layout") {
+    protected function Page($MODEL = "", $action = "", $controller = "", $layout = "layout") {
         $this->HTML($this->Partial($MODEL, $action, $controller), $layout);
     }
 
@@ -29,5 +29,16 @@ class baseController {
         include PATH . "template/" . $controller . "/" . $action . ".php";
         //Получаем содаржимое отрисованного файла
         return ob_get_clean();
+    }
+
+    protected function Redirect($action = "", $controller = "") {
+        //Очищаем переменные
+        $action = trim($action);
+        $controller = trim($controller);
+
+        if ($action == "") $action = $this->action;
+        if ($controller == "") $controller = $this->controller;
+
+        header("Location: /" . $controller . "/" . $action);
     }
 } 
