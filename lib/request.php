@@ -42,3 +42,46 @@ if (isset($parts[1])) {
 for ($i = 2; $i < count($parts); $i++) {
     $PARAMS[] = $parts[$i];
 }
+
+//Выполнить контроллер с акшеном
+function ExecPath($controller = "", $action = "", $params = []) {
+    //Подключение глобальных переменных
+    global $CONTROLLER, $ACTION, $PARAMS;
+
+    //Очищаем переменные
+    $controller = trim($controller);
+    $action = trim($action);
+
+    //Проверка переменных на пустоту
+    if ($controller == "")
+        $controller = $CONTROLLER;
+    if ($action == "")
+        $action = $ACTION;
+    if (count($params) == 0)
+        $params = $PARAMS;
+
+    //Подключаем базовый файл
+    require_once PATH . "contoller/base.php";
+
+    //Проверяем файл
+    $filename = PATH . "contoller/" . $controller . ".php"; 
+    if (!file_exists($filename))
+        return "";
+
+    require_once $filename;
+
+    //проверяем объект файла
+    $tmp =  $controller . "Controller";
+    if (!class_exists($tmp))
+        return "";
+
+    //Создаем элемент файла
+    $c = new $tmp();
+    
+    //Проверяем функцию
+    if (!method_exists($c, $action))
+        return "";
+
+    //Вызываем функцию из файла
+    return $c->$action($params);    
+}

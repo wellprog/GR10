@@ -1,5 +1,5 @@
 <?php
+    require_once dirname(__FILE__) . "/lib/init.php";
 
+    ExecPath();
 ?>
-
-<h1>Привет мир</h1>
