@@ -77,6 +77,8 @@ function ExecPath($controller = "", $action = "", $params = []) {
 
     //Создаем элемент файла
     $c = new $tmp();
+    $c->controller = $controller;
+    $c->action = $action;
     
     //Проверяем функцию
     if (!method_exists($c, $action))
