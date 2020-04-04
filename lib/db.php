@@ -12,14 +12,17 @@ $DB = null;
 function GetDB() {
     global $DB;
 
+    //Если подключение уже есть то используем его 
     if ($DB !== null)
         return $DB;
 
+    //Создаем новое подключение
     $DB = new PDO("mysql:host=localhost;dbname=sytedb", "root", "", [
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8", //Задаем кодировку
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC  //Задаем метод выборки
     ]);
 
+    //Возвращаем готовое подключение
     return $DB;
 }
 

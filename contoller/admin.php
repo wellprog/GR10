@@ -18,7 +18,7 @@ class adminController extends baseController {
     }
 
     public function index($params) {
-        $this->Page();
+        return $this->Page();
     }
 
 }

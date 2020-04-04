@@ -2,10 +2,6 @@
 
 class userController extends baseController {
 
-    public function index($params) {
-        return $this->Page();
-    }
-
     public function logout($params) {
         UnsetUser();
 
@@ -93,7 +89,7 @@ class userController extends baseController {
                                     "password" => md5($password)
                                 ]);
 
-                return $this->Redirect("index");
+                return $this->Redirect("login");
             }
 
         }

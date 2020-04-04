@@ -15,7 +15,10 @@
                     <td><?= $row["Id"] ?></td>
                     <td><?= $row["name"] ?></td>
                     <td><?= $row["description"] ?></td>
-                    <td></td>
+                    <td>
+                        <a href="/adminnews/editcategory/<?= $row["Id"] ?>" class="btn btn-secondary">Редактировать</a>
+                        <a href="/adminnews/deletecategory/<?= $row["Id"] ?>" class="btn btn-danger">Удалить</a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

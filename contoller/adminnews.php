@@ -69,4 +69,16 @@ class adminnewsController extends baseController {
         return $this->Page($cat);
     }
 
+    public function deletecategory($params) {
+        $id = 0;
+        if (count($params) > 0) {
+            $id = $params[0];
+        }
+
+        if ($id != 0)
+            UpdateIntoDB("DELETE FROM `newscategoryes` WHERE `Id` = :id", ["id" => $id]);
+
+        return $this->Redirect("categories");
+    }
+
 }
