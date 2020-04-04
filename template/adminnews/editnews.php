@@ -1,3 +1,5 @@
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+
 <h1>Добавление / Редактирование Новости</h1>
 
 <form method="POST">
@@ -12,6 +14,9 @@
             <th>Текст</th>
             <td>
                 <textarea name="text"><?= $MODEL["News"]["Text"] ?></textarea>
+                <script>
+                        CKEDITOR.replace( 'text' );
+                </script>
             </td>
         </tr>
         <tr>
@@ -19,7 +24,9 @@
             <td>
                 <select name="category_id">
                     <?php foreach($MODEL["Categoryes"] as $cat): ?>
-                        <option value="<?= $cat["Id"] ?>"><?= $cat["name"] ?></option>
+                        <option value="<?= $cat["Id"] ?>" 
+                            <?php if ($cat["Id"] == $MODEL["News"]["CategoryId"]) echo "selected" ?> 
+                        ><?= $cat["name"] ?></option>
                     <?php endforeach; ?>
                 </select>
             </td>
