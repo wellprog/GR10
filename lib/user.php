@@ -13,6 +13,6 @@ function SetUser($user) {
     $_SESSION["user"] = $user;
 }
 
-function UnserUser() {
+function UnsetUser() {
     unset($_SESSION["user"]);
 }
