@@ -5,6 +5,14 @@ class baseController {
     public $controller = "";
     public $action = "";
 
+    public function Auth() {
+        return true;
+    } 
+
+    public function access_denied() {
+        return $this->Page("", "access_denied", "shared");
+    }
+
     protected function Page($MODEL = "", $action = "", $controller = "", $layout = "layout") {
         $this->HTML($this->Partial($MODEL, $action, $controller), $layout);
     }

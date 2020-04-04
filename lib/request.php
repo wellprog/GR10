@@ -89,6 +89,10 @@ function ExecPath($controller = "", $action = "", $params = []) {
     if (!method_exists($c, $action))
         return "";
 
+    if (!$c->Auth()) {
+        return $c->access_denied();    
+    }
+
     //Вызываем функцию из файла
     return $c->$action($params);    
 }
