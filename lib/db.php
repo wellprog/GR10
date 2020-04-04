@@ -35,6 +35,10 @@ function GetAllFromDB($sql, $params = []) {
     //Выполнение запроса с параметрами
     $stmt->execute($params);
 
+    if ($stmt->errorCode() > 0) {
+        var_dump($stmt->errorInfo()); exit();
+    }
+
     //Получение всех данных из базы
     $result = $stmt->fetchAll();
     //Закрытие соединения
@@ -52,6 +56,10 @@ function GetFirstFromDB($sql, $params = []) {
     $stmt = $db->prepare($sql);
     //Выполнение запроса с параметрами
     $stmt->execute($params);
+
+    if ($stmt->errorCode() > 0) {
+        var_dump($stmt->errorInfo()); exit();
+    }
 
     //Получение всех данных из базы
     $result = $stmt->fetch();
@@ -72,6 +80,10 @@ function InsertIntoDB($sql, $params = []) {
     //Выполнение запроса с параметрами
     $stmt->execute($params);
 
+    if ($stmt->errorCode() > 0) {
+        var_dump($stmt->errorInfo()); exit();
+    }
+
     $result = $db->lastInsertId();
 
     $stmt->closeCursor();
@@ -89,6 +101,10 @@ function UpdateIntoDB($sql, $params = []) {
     $stmt = $db->prepare($sql);
     //Выполнение запроса с параметрами
     $stmt->execute($params);
+
+    if ($stmt->errorCode() > 0) {
+        var_dump($stmt->errorInfo()); exit();
+    }
 
     $result = $stmt->rowCount();
 

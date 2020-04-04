@@ -18,6 +18,7 @@
                     <td>
                         <a href="/adminnews/editcategory/<?= $row["Id"] ?>" class="btn btn-secondary">Редактировать</a>
                         <a href="/adminnews/deletecategory/<?= $row["Id"] ?>" class="btn btn-danger">Удалить</a>
+                        <a href="/adminnews/news/<?= $row["Id"] ?>" class="btn btn-light">Посмотреть новости</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
