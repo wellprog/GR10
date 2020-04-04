@@ -76,3 +76,21 @@ function InsertIntoDB($sql, $params = []) {
     //Возврат результата
     return $result;
 }
+
+
+function UpdateIntoDB($sql, $params = []) {
+    //Получение подключения
+    $db = GetDB();
+
+    //Подготовка запроса
+    $stmt = $db->prepare($sql);
+    //Выполнение запроса с параметрами
+    $stmt->execute($params);
+
+    $result = $stmt->rowCount();
+
+    $stmt->closeCursor();
+
+    //Возврат результата
+    return $result;
+}
