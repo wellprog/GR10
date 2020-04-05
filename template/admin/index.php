@@ -2,6 +2,7 @@
     .admin-main-menu {
         display: flex;
     }
+
     .admin-main-menu a {
         display: block;
         width: 200px;
@@ -11,9 +12,20 @@
     }
 </style>
 
+<div class="destination_details_info">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-9">
 
-<div class="admin-main-menu">
-    <a href="/adminnews/news">Новости</a>
-    <a href="/adminnews/categories">Категории новостей</a>
-    <a href="/user/logout">Выход</a>
+
+                <div class="admin-main-menu">
+                    <a href="/adminnews/news">Новости</a>
+                    <a href="/adminnews/categories">Категории новостей</a>
+                    <a href="/user/logout">Выход</a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
 </div>

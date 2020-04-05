@@ -57,6 +57,7 @@ class adminnewsController extends baseController {
         $news = [
             "Title" => "",
             "Text" => "",
+            "ShortText" => "",
             "CategoryId" => 0,
             "MainPhoto" => ""
         ];
@@ -80,26 +81,46 @@ class adminnewsController extends baseController {
         if (isset($_POST["title"])) {
             $title = $_POST["title"];
             $text = $_POST["text"];
+            $short_text = $_POST["short_text"];
             $category_id = $_POST["category_id"];
+            $main_photo = $news["MainPhoto"];
+
+            foreach ($_FILES as $file) {
+                if ($file["error"] != 0 || $file["size"] == 0) continue;
+
+                $main_photo = uniqid() . ".jpg";
+                move_uploaded_file($file["tmp_name"], PATH . "content/img/" . $main_photo);
+            }
+            
 
             $currentUser = GetUser();
 
             if ($id == 0) {
                 InsertIntoDB("INSERT INTO `News` 
-                                (`Id`, `Title`, `Text`, `CreateDate`, 
+                                (`Id`, `Title`, `Text`, `ShortText` ,`CreateDate`, 
                                 `CategoryId`, `UserId`, `MainPhoto`) 
                               VALUES 
-                                (NULL, :title, :text, current_timestamp(), :categoryid, :userid, '')", [
+                                (NULL, :title, :text, :short_text, current_timestamp(), :categoryid, :userid, :photo)", [
                                   "title" => $title,
                                   "text" => $text,
+                                  "short_text" => $short_text,
                                   "categoryid" => $category_id,
-                                  "userid" => $currentUser["Id"]
+                                  "userid" => $currentUser["Id"],
+                                  "photo" => $main_photo
                               ]);
             } else {
-                UpdateIntoDB("UPDATE `News` SET `Title` = :title, `Text` = :text, `CategoryId` = :categoryid WHERE `Id` = :id", [
+                UpdateIntoDB("UPDATE `News` SET 
+                                `Title` = :title, 
+                                `Text` = :text, 
+                                `ShortText` = :short_text,
+                                `CategoryId` = :categoryid,
+                                `MainPhoto` = :photo 
+                                WHERE `Id` = :id", [
                     "title" => $title,
                     "text" => $text,
+                    "short_text" => $short_text,
                     "categoryid" => $category_id,
+                    "photo" => $main_photo,
                     "id" => $id
                 ]);
             }

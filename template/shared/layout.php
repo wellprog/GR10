@@ -56,10 +56,9 @@
                                             <li><a class="active" href="index.html">home</a></li>
                                             <li><a href="about.html">About</a></li>
                                             <li><a class="" href="travel_destination.html">Destination</a></l/li>
-                                            <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                            <li><a href="#">Категории <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                        <li><a href="destination_details.html">Destinations details</a></li>
-                                                        <li><a href="elements.html">elements</a></li>
+                                                        <?= ExecPath("news", "category_menu") ?>
                                                 </ul>
                                             </li>
                                             <li><a href="#">blog <i class="ti-angle-down"></i></a>
@@ -111,17 +110,9 @@
         </div>
     </div> -->
 
-    <div class="destination_details_info">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-9">
                     
-                    <?= $COMPONENT ?>
+    <?= $COMPONENT ?>
                     
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- newletter_area_start  -->
     <div class="newletter_area overlay">

@@ -23,7 +23,7 @@ class baseController {
     }
 
     // Возвращает отрисованный компонент
-    protected function Partial($MODEL, $action = "", $controller = "") {
+    protected function Partial($MODEL = "", $action = "", $controller = "") {
         //Очищаем переменные
         $action = trim($action);
         $controller = trim($controller);
