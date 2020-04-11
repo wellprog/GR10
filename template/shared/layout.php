@@ -54,8 +54,6 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="index.html">home</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a class="" href="travel_destination.html">Destination</a></l/li>
                                             <li><a href="#">Категории <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                         <?= ExecPath("news", "category_menu") ?>
@@ -68,6 +66,11 @@
                                                 </ul>
                                             </li>
                                             <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="#">Пользователь <i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                        <?= ExecPath("menu", "user_menu") ?>
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </nav>
                                 </div>

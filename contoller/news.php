@@ -24,4 +24,25 @@ class newsController extends baseController {
         ]);
     }
 
+    public function single($params) {
+        //Проверка на каличество параметров которые нам передали
+        if (count($params) == 0)
+            return $this->Redirect("index", "home"); //Если их нет то редирект на главную
+
+        //Получили первый параметр
+        $id = $params[0];
+
+        //Пытаемся получить новость из базы данных
+        $single = GetFirstFromDB("SELECT * FROM `news` WHERE `Id` = :id", ["id" => $id]);
+
+        //Если такой новости нет
+        if ($single === false)
+            return $this->Redirect("index", "home");//то редирект на главную
+
+        //Если все ОК то отрисовываем страницу
+        return $this->Page([
+            "news" => $single
+        ]);
+    }
+
 }

@@ -49,4 +49,8 @@ class baseController {
 
         header("Location: /" . $controller . "/" . $action);
     }
+
+    protected function RedirectRaw($url) {
+        header("Location: " . $url);
+    }
 } 
