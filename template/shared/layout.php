@@ -59,10 +59,9 @@
                                                         <?= ExecPath("news", "category_menu") ?>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">blog <i class="ti-angle-down"></i></a>
+                                            <li><a href="#">Весело <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">blog</a></li>
-                                                    <li><a href="single-blog.html">single-blog</a></li>
+                                                    <li><a href="/revert">Перевернуть слова</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="contact.html">Contact</a></li>
