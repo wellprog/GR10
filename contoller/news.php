@@ -20,7 +20,8 @@ class newsController extends baseController {
         $elements = GetAllFromDB("SELECT * FROM `news` WHERE `CategoryId` = :id", ["id" => $id]);
 
         return $this->Page([
-            "items" => $elements
+            "items" => $elements,
+            "category" => $id
         ]);
     }
 
@@ -62,6 +63,54 @@ class newsController extends baseController {
         $news = GetAllFromDB("SELECT * FROM `news` ORDER BY CreateDate DESC limit 3");
 
         return $this->Partial($news);
+    }
+
+    public function search_side($params) {
+        return $this->Partial();
+    }
+
+    public function subscribe_side($params) {
+        $category = $params[0];
+        return $this->Partial($category);
+    }
+
+    public function subscribe($params) {
+        if (!isset($_POST["email"]))
+            return $this->RedirectBack();
+
+        $currentUser = GetUser();
+
+        $email = trim($_POST["email"]);
+        $userId = 0;
+        $category = $params[0];
+        
+        if ($currentUser != null)
+            $userId = $currentUser["Id"];
+
+        if ($email == "")
+            return $this->RedirectBack();
+
+        InsertIntoDB("INSERT INTO `subscribes` (`Id`, `UserID`, `EMail`, `CategoryId`) 
+                      VALUES (NULL, :userid, :email, :category)", [
+            "userid" => $userId,
+            "email" => $email,
+            "category" => $category
+        ]);
+
+        return $this->RedirectBack();
+    }
+
+    public function search($params) {
+        if (!isset($_GET["keyword"]))
+            return $this->RedirectBack();
+
+        $elements = GetAllFromDB("SELECT * FROM `news` WHERE `Text` like :text", [
+            "text" => "%" . $_GET["keyword"] . "%"
+        ]);
+
+        return $this->Page([
+            "items" => $elements
+        ], "category");
     }
 
 }

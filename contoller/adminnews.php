@@ -108,6 +108,9 @@ class adminnewsController extends baseController {
                                   "userid" => $currentUser["Id"],
                                   "photo" => $main_photo
                               ]);
+
+                //SendMail()
+                //TODO отправить сообщение
             } else {
                 UpdateIntoDB("UPDATE `News` SET 
                                 `Title` = :title, 

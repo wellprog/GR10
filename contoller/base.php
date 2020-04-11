@@ -50,6 +50,14 @@ class baseController {
         header("Location: /" . $controller . "/" . $action);
     }
 
+    protected function RedirectBack() {
+        $url = trim($_SERVER["HTTP_REFERER"]);
+        if ($url == "")
+            $url = "/";
+        
+        $this->RedirectRaw($url);
+    }
+
     protected function RedirectRaw($url) {
         header("Location: " . $url);
     }
