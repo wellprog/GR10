@@ -22,7 +22,7 @@ class commentsController extends baseController {
             "comments" => $comments,
             "module" => $module,
             "record" => $record,
-            "showName" => $currentUser === null 
+            "showName" => $currentUser === null
         ]);
     }
 

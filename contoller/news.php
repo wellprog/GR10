@@ -45,4 +45,23 @@ class newsController extends baseController {
         ]);
     }
 
+    public function category_side($params) {
+
+        $cats = GetAllFromDB("  SELECT 
+                                    `newscategoryes`.*,
+                                    COUNT(news.Id) as newsCount
+                                FROM `newscategoryes`
+                                LEFT JOIN `news` ON `news`.`CategoryId` = newscategoryes.Id
+                                GROUP BY newscategoryes.Id");
+
+        //Отрисовать часть страницы
+        return $this->Partial($cats);
+    }
+
+    public function recent_side($params) {
+        $news = GetAllFromDB("SELECT * FROM `news` ORDER BY CreateDate DESC limit 3");
+
+        return $this->Partial($news);
+    }
+
 }
