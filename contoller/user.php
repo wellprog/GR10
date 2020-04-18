@@ -73,7 +73,7 @@ class userController extends baseController {
                 $errors[] = "Пароли не совпадают";
 
             //Проверить что пользователь уже существует
-            $currentUser = GetFirstFromDB("SELECT * FROM `Users` WHERE `Login` = :login;", ["login" => $login]);
+            $currentUser = GetFirstFromDB("SELECT * FROM `users` WHERE `Login` = :login;", ["login" => $login]);
             if ($currentUser !== false) {
                 $errors[] = "Такой пользователь существует";
             }
