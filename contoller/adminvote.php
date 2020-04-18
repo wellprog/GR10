@@ -157,8 +157,36 @@ class adminvoteController extends baseController {
             "Text" => ""
         ];
 
-        //TODO Сохранить или обновить
-        
+        if (isset($params[1])) {
+            $tmp = GetFirstFromDB("SELECT * FROM `votequestions` WHERE `Id` = :Id", ["Id" => $params[1]]);
+            if ($tmp !== false)
+                $question = $tmp;
+        }
+
+        if (isset($_POST["Title"])) {
+
+            $question["Title"] = $_POST["Title"];
+            $question["Text"] = $_POST["Text"];
+
+            if ($question["Id"] > 0) {
+                UpdateIntoDB("UPDATE `votequestions` SET 
+                                    `Title` = :Title, `Text` = :Text
+                                    WHERE `Id` = :Id", [
+                                    "Title" => $question["Title"],
+                                    "Text" => $question["Text"],
+                                    "Id" => $question["Id"]    
+                              ]);
+            } else {
+                UpdateIntoDB("INSERT INTO `votequestions` (`VoteId`, `Title`, `Text`) 
+                              VALUES (:VoteId, :Title, :Text);", [
+                                    "VoteId" => $question["VoteId"],
+                                    "Title" => $question["Title"],
+                                    "Text" => $question["Text"]    
+                              ]);
+            }
+
+            return $this->Redirect("questions/" . $vote["Id"]);
+        }        
 
         return $this->Page([
             "Vote" => $vote,
