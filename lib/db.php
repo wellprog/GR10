@@ -93,6 +93,11 @@ function InsertIntoDB($sql, $params = []) {
 }
 
 
+function DeleteFromDB($sql, $params = []) {
+    return UpdateIntoDB($sql, $params);
+}
+
+
 function UpdateIntoDB($sql, $params = []) {
     //Получение подключения
     $db = GetDB();

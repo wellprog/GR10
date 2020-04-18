@@ -140,7 +140,13 @@ class adminnewsController extends baseController {
 
     //Удаление новости
     public function deletenews($params) {
+        if (count($params) > 0) {
+            $id = $params[0];
 
+            DeleteFromDB("DELETE FROM `news` WHERE Id = :id ", [ "id" => $id ]);
+        }
+
+        return $this->Redirect("news");
     }
 
     public function categories ($params) {
