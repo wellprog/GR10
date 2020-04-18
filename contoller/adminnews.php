@@ -27,12 +27,12 @@ class adminnewsController extends baseController {
 
         $sql = "
         SELECT                                              -- Выбрать 
-            `News`.*,                                       -- Все Поля из таблицы новосей
+            `news`.*,                                       -- Все Поля из таблицы новосей
             `newscategoryes`.`name` as `CategoryName`,      -- Поле имя из таблицы категорий и переименовать его в CategoryName
             `users`.`Login` as `UserName`                   -- Поле логин из таблицы пользователей и переименовать его в UserName
         FROM `news`                                         -- Из таблицы новостей
         LEFT JOIN `newscategoryes`                          -- Соединить с таблицей категорий
-            ON `News`.`CategoryId` = `newscategoryes`.`Id`  -- По Критериям
+            ON `news`.`CategoryId` = `newscategoryes`.`Id`  -- По Критериям
         LEFT JOIN `users`                                   -- Соединить с таблицей пользователей
             ON `news`.`UserId` = `users`.`Id`               -- По Критериям 
             
