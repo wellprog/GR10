@@ -71,7 +71,7 @@ class adminnewsController extends baseController {
             $id = $params[0];
 
             //И если передали я пытаюсь найти эту запись
-            $tmp = GetFirstFromDB("SELECT * FROM `News` WHERE `Id` = :id ", [ "id" => $id ]);
+            $tmp = GetFirstFromDB("SELECT * FROM `news` WHERE `Id` = :id ", [ "id" => $id ]);
             if ($tmp != false)
                 $news = $tmp;
         }
@@ -144,7 +144,7 @@ class adminnewsController extends baseController {
     }
 
     public function categories ($params) {
-        $cats = GetAllFromDB("SELECT * FROM `NewsCategoryes`");
+        $cats = GetAllFromDB("SELECT * FROM `newscategoryes`");
         return $this->Page([
             "Cats" => $cats 
         ]);
