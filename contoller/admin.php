@@ -24,7 +24,9 @@ class adminController extends baseController {
     public function pull() {
         $result = shell_exec("cd " . PATH . " & git pull");
 
-        var_dump($result);
+        echo "<pre>";
+        echo $result;
+        echo "</pre>";
     }
 
 }
