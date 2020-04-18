@@ -28,7 +28,7 @@ class userController extends baseController {
             }
 
             //Проверить что пользователь уже существует
-            $currentUser = GetFirstFromDB("SELECT * FROM `Users` WHERE `Login` = :login;", ["login" => $login]);
+            $currentUser = GetFirstFromDB("SELECT * FROM `users` WHERE `Login` = :login;", ["login" => $login]);
             if ($currentUser === false) {
                 $errors[] = "Такого пользователя не существует";
             } else {
@@ -80,7 +80,7 @@ class userController extends baseController {
                 
             if (count($errors) == 0) {
 
-                InsertIntoDB("INSERT INTO `Users` 
+                InsertIntoDB("INSERT INTO `users` 
                                 (`Id`, `Name`, `LastName`, `Login`, `Password`, `IsAdmin`) 
                                 VALUES (NULL, :name, :lastname, :login, :password, '0') ", [
                                     "name" => $name,

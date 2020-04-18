@@ -30,7 +30,7 @@ class adminnewsController extends baseController {
             `News`.*,                                       -- Все Поля из таблицы новосей
             `newscategoryes`.`name` as `CategoryName`,      -- Поле имя из таблицы категорий и переименовать его в CategoryName
             `users`.`Login` as `UserName`                   -- Поле логин из таблицы пользователей и переименовать его в UserName
-        FROM `News`                                         -- Из таблицы новостей
+        FROM `news`                                         -- Из таблицы новостей
         LEFT JOIN `newscategoryes`                          -- Соединить с таблицей категорий
             ON `News`.`CategoryId` = `newscategoryes`.`Id`  -- По Критериям
         LEFT JOIN `users`                                   -- Соединить с таблицей пользователей
@@ -62,7 +62,7 @@ class adminnewsController extends baseController {
             "MainPhoto" => ""
         ];
 
-        $cats = GetAllFromDB("SELECT * FROM `NewsCategoryes`");
+        $cats = GetAllFromDB("SELECT * FROM `newscategoryes`");
 
         $id = 0;
 
@@ -96,7 +96,7 @@ class adminnewsController extends baseController {
             $currentUser = GetUser();
 
             if ($id == 0) {
-                InsertIntoDB("INSERT INTO `News` 
+                InsertIntoDB("INSERT INTO `news` 
                                 (`Id`, `Title`, `Text`, `ShortText` ,`CreateDate`, 
                                 `CategoryId`, `UserId`, `MainPhoto`) 
                               VALUES 
@@ -112,7 +112,7 @@ class adminnewsController extends baseController {
                 //SendMail()
                 //TODO отправить сообщение
             } else {
-                UpdateIntoDB("UPDATE `News` SET 
+                UpdateIntoDB("UPDATE `news` SET 
                                 `Title` = :title, 
                                 `Text` = :text, 
                                 `ShortText` = :short_text,
@@ -165,7 +165,7 @@ class adminnewsController extends baseController {
             $id = $params[0];
 
             //И если передали я пытаюсь найти эту запись
-            $tmp = GetFirstFromDB("SELECT * FROM `NewsCategoryes` WHERE `Id` = :id ", [ "id" => $id ]);
+            $tmp = GetFirstFromDB("SELECT * FROM `newscategoryes` WHERE `Id` = :id ", [ "id" => $id ]);
             if ($tmp != false)
                 $cat = $tmp;
         }
@@ -175,13 +175,13 @@ class adminnewsController extends baseController {
             $description = $_POST["description"];
 
             if ($id == 0) {
-                InsertIntoDB("INSERT INTO `NewsCategoryes`(`Name`, `Description`)
+                InsertIntoDB("INSERT INTO `newscategoryes`(`Name`, `Description`)
                               VALUES (:name, :description)", [
                                   "name" => $name,
                                   "description" => $description
                               ]);
             } else {
-                UpdateIntoDB("UPDATE `NewsCategoryes` SET `Name` = :name, `Description` = :description WHERE `Id` = :id", [
+                UpdateIntoDB("UPDATE `newscategoryes` SET `Name` = :name, `Description` = :description WHERE `Id` = :id", [
                     "name" => $name,
                     "description" => $description,
                     "id" => $id
