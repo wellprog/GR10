@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1
--- Время создания: Апр 11 2020 г., 10:25
--- Версия сервера: 10.4.11-MariaDB
--- Версия PHP: 7.4.3
+-- Host: 127.0.0.1
+-- Generation Time: Apr 18, 2020 at 05:11 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `sytedb`
+-- Database: `sytedb`
 --
 CREATE DATABASE IF NOT EXISTS `sytedb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `sytedb`;
@@ -27,7 +26,7 @@ USE `sytedb`;
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `comments`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE `comments` (
@@ -41,7 +40,7 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `comments`
+-- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`Id`, `Module`, `Record`, `UserName`, `UserId`, `Coment`, `CreateDate`) VALUES
@@ -52,7 +51,7 @@ INSERT INTO `comments` (`Id`, `Module`, `Record`, `UserName`, `UserId`, `Coment`
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `news`
+-- Table structure for table `news`
 --
 
 CREATE TABLE `news` (
@@ -67,7 +66,7 @@ CREATE TABLE `news` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `news`
+-- Dumping data for table `news`
 --
 
 INSERT INTO `news` (`Id`, `Title`, `Text`, `ShortText`, `CreateDate`, `CategoryId`, `UserId`, `MainPhoto`) VALUES
@@ -77,7 +76,7 @@ INSERT INTO `news` (`Id`, `Title`, `Text`, `ShortText`, `CreateDate`, `CategoryI
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `newscategoryes`
+-- Table structure for table `newscategoryes`
 --
 
 CREATE TABLE `newscategoryes` (
@@ -87,7 +86,7 @@ CREATE TABLE `newscategoryes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `newscategoryes`
+-- Dumping data for table `newscategoryes`
 --
 
 INSERT INTO `newscategoryes` (`Id`, `name`, `description`) VALUES
@@ -99,7 +98,20 @@ INSERT INTO `newscategoryes` (`Id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `users`
+-- Table structure for table `subscribes`
+--
+
+CREATE TABLE `subscribes` (
+  `Id` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
+  `EMail` varchar(100) NOT NULL,
+  `CategoryId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -112,24 +124,77 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`Id`, `Name`, `LastName`, `Login`, `Password`, `IsAdmin`) VALUES
 (1, 'test', 'test', 'test', '25d55ad283aa400af464c76d713c07ad', 1);
 
+-- --------------------------------------------------------
+
 --
--- Индексы сохранённых таблиц
+-- Table structure for table `vote`
+--
+
+CREATE TABLE `vote` (
+  `Id` int(11) NOT NULL,
+  `Title` varchar(100) NOT NULL,
+  `ShortText` text NOT NULL,
+  `Text` text NOT NULL,
+  `StartDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `EndDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `IsAnonym` tinyint(1) NOT NULL,
+  `Type` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `vote`
+--
+
+INSERT INTO `vote` (`Id`, `Title`, `ShortText`, `Text`, `StartDate`, `EndDate`, `IsAnonym`, `Type`) VALUES
+(1, 'Тест 1', '', '<p>Тестовое голосование</p>\r\n', '2020-04-18 08:25:00', '2020-04-19 08:25:00', 1, 0),
+(2, '123', '<p>123</p>\r\n', '<p>123</p>\r\n', '2020-04-18 13:26:00', '2020-04-18 13:26:00', 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `voteanswers`
+--
+
+CREATE TABLE `voteanswers` (
+  `Id` int(11) NOT NULL,
+  `VoteId` int(11) NOT NULL,
+  `QuestionId` int(11) NOT NULL,
+  `UserId` int(11) DEFAULT NULL,
+  `Description` text NOT NULL,
+  `UserName` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `votequestions`
+--
+
+CREATE TABLE `votequestions` (
+  `Id` int(11) NOT NULL,
+  `VoteId` int(11) NOT NULL,
+  `Title` varchar(100) NOT NULL,
+  `Text` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `comments`
+-- Indexes for table `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Индексы таблицы `news`
+-- Indexes for table `news`
 --
 ALTER TABLE `news`
   ADD PRIMARY KEY (`Id`),
@@ -137,44 +202,109 @@ ALTER TABLE `news`
   ADD KEY `UserId` (`UserId`);
 
 --
--- Индексы таблицы `newscategoryes`
+-- Indexes for table `newscategoryes`
 --
 ALTER TABLE `newscategoryes`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Индексы таблицы `users`
+-- Indexes for table `subscribes`
+--
+ALTER TABLE `subscribes`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `UserID` (`UserID`),
+  ADD KEY `CategoryId` (`CategoryId`);
+
+--
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`Id`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- Indexes for table `vote`
+--
+ALTER TABLE `vote`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `voteanswers`
+--
+ALTER TABLE `voteanswers`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `VoteId` (`VoteId`),
+  ADD KEY `QuestionId` (`QuestionId`),
+  ADD KEY `UserId` (`UserId`);
+
+--
+-- Indexes for table `votequestions`
+--
+ALTER TABLE `votequestions`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `VoteId` (`VoteId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT для таблицы `comments`
+-- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT для таблицы `news`
+-- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT для таблицы `newscategoryes`
+-- AUTO_INCREMENT for table `newscategoryes`
 --
 ALTER TABLE `newscategoryes`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT для таблицы `users`
+-- AUTO_INCREMENT for table `subscribes`
+--
+ALTER TABLE `subscribes`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `vote`
+--
+ALTER TABLE `vote`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `voteanswers`
+--
+ALTER TABLE `voteanswers`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `votequestions`
+--
+ALTER TABLE `votequestions`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `subscribes`
+--
+ALTER TABLE `subscribes`
+  ADD CONSTRAINT `subscribes_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`Id`),
+  ADD CONSTRAINT `subscribes_ibfk_2` FOREIGN KEY (`CategoryId`) REFERENCES `newscategoryes` (`Id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
