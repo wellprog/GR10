@@ -21,7 +21,7 @@ class adminController extends baseController {
         return $this->Page();
     }
 
-    public function Pull() {
+    public function pull() {
         $result = shell_exec("cd " . PATH . " & git pull");
 
         var_dump($result);
