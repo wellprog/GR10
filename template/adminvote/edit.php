@@ -17,6 +17,15 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>Краткое описание</th>
+                            <td>
+                                <textarea name="ShortText"><?= $MODEL["Vote"]["ShortText"] ?></textarea>
+                                <script>
+                                    CKEDITOR.replace('ShortText');
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Описание</th>
                             <td>
                                 <textarea name="Text"><?= $MODEL["Vote"]["Text"] ?></textarea>
@@ -51,7 +60,7 @@
                         <tr>
                             <th>Дата начала</th>
                             <td>
-                                <input type="datetime-local" value="<?php 
+                                <input type="datetime-local" name="StartDate" value="<?php 
                                         $d = new DateTime($MODEL["Vote"]["StartDate"]); 
                                         echo $d->format("Y-m-d\TH:i");
                                     ?>" />
@@ -61,7 +70,7 @@
                         <tr>
                             <th>Дата окончания</th>
                             <td>
-                                <input type="datetime-local" value="<?php 
+                                <input type="datetime-local" name="EndDate" value="<?php 
                                         $d = new DateTime($MODEL["Vote"]["EndDate"]); 
                                         echo $d->format("Y-m-d\TH:i");
                                     ?>" />

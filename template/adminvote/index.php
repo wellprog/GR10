@@ -11,7 +11,6 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Наименование</th>
-                                <th>Описание</th>
                                 <th>Дата начала</th>
                                 <th>Дата окончания</th>
                                 <th>Тип голосования</th>
@@ -24,7 +23,6 @@
                                 <tr>
                                     <td><?= $row["Id"] ?></td>
                                     <td><?= $row["Title"] ?></td>
-                                    <td><?= $row["Text"] ?></td>
                                     <td><?= $row["StartDate"] ?></td>
                                     <td><?= $row["EndDate"] ?></td>
                                     <td>
@@ -39,6 +37,7 @@
                                         ?>
                                     </td>
                                     <td>
+                                        <a href="/adminvote/questions/<?= $row["Id"] ?>" class="btn btn-secondary">Вопросы</a>
                                         <a href="/adminvote/edit/<?= $row["Id"] ?>" class="btn btn-secondary">Редактировать</a>
                                         <a href="/adminvote/delete/<?= $row["Id"] ?>" class="btn btn-danger">Удалить</a>
                                     </td>
