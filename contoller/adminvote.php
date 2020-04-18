@@ -158,6 +158,7 @@ class adminvoteController extends baseController {
         ];
 
         //TODO Сохранить или обновить
+        
 
         return $this->Page([
             "Vote" => $vote,
