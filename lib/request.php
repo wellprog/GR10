@@ -71,14 +71,14 @@ function ExecPath($controller = "", $action = "", $params = []) {
     //Проверяем файл
     $filename = PATH . "contoller/" . $controller . ".php"; 
     if (!file_exists($filename))
-        return "";
+        return ExecPath("errors", "e404");
 
     require_once $filename;
 
     //проверяем объект файла
     $tmp =  $controller . "Controller";
     if (!class_exists($tmp))
-        return "";
+        return ExecPath("errors", "e404");
 
     //Создаем элемент файла
     $c = new $tmp();
@@ -87,7 +87,7 @@ function ExecPath($controller = "", $action = "", $params = []) {
     
     //Проверяем функцию
     if (!method_exists($c, $action))
-        return "";
+        return ExecPath("errors", "e404");
 
     if (!$c->Auth()) {
         return $c->access_denied();    
