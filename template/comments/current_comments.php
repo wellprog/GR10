@@ -11,6 +11,7 @@
                 <div class="desc">
                     <p class="comment">
                         <?= $comment["Coment"] ?>
+                        <td><?= ExecPath("likes", "widget", ["comment", $comment["Id"]]) ?></td>
                     </p>
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center">

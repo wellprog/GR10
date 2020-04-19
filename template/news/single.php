@@ -31,6 +31,7 @@
                         
                         <?= $MODEL["news"]["Text"] ?>
 
+                        <?= ExecPath("likes", "widget", ["news", $MODEL["news"]["Id"]]) ?>
                     </div>
                 </div>
 

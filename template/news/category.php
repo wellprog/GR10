@@ -43,6 +43,7 @@
                             <?= $item["ShortText"] ?>
 
                             <ul class="blog-info-link">
+                                <?= ExecPath("likes", "widget", ["news", $item["Id"]]) ?>
                                 <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
                                 <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
                             </ul>
