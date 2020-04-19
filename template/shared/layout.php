@@ -26,8 +26,12 @@
     <link rel="stylesheet" href="/css/slicknav.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
 
+    <link rel="stylesheet" href="https://onesignal.github.io/emoji-picker/lib/css/emoji.css">
+
     <link rel="stylesheet" href="/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+
+    <script src="/js/vendor/jquery-1.12.4.min.js"></script>
 </head>
 
 <body>
@@ -399,7 +403,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script> -->
     <!-- JS here -->
     <script src="/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- <script src="/js/vendor/jquery-1.12.4.min.js"></script> -->
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/owl.carousel.min.js"></script>
