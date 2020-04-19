@@ -62,6 +62,7 @@
                                             <li><a href="#">Весело <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="/revert">Перевернуть слова</a></li>
+                                                    <li><a href="/chat">Чат</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="#">Пользователь <i class="ti-angle-down"></i></a>
