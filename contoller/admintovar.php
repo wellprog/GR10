@@ -105,7 +105,14 @@ class admintovarController extends baseController {
     }
 
     public function delete($params) {
-        
+        if (count($params) < 1)
+            return $this->Redirect("index");
+
+        $id = $params[0];
+
+        DeleteFromDB("DELETE FROM `tovar` WHERE `Id` = :Id", ["Id" => $id]);
+
+        return $this->Redirect("index");
     }
 
 }
