@@ -22,7 +22,10 @@
                     <a href="/adminnews/news">Новости</a>
                     <a href="/adminnews/categories">Категории новостей</a>
                     <a href="/adminvote">Голосования</a>
+                    <a href="/admintovar/">Товары</a>
+
                     <a href="/admin/pull?rnd=<?= rand() ?>">Обновить сайт</a>
+                    
                     <a href="/user/logout">Выход</a>
                 </div>
 
