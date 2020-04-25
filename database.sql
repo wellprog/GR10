@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2020 at 05:11 PM
+-- Generation Time: Apr 25, 2020 at 08:55 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -22,6 +22,40 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `sytedb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `sytedb`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `allchat`
+--
+
+CREATE TABLE `allchat` (
+  `Id` int(11) NOT NULL,
+  `ChatName` varchar(100) NOT NULL,
+  `UserName` varchar(100) NOT NULL,
+  `Text` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `allchat`
+--
+
+INSERT INTO `allchat` (`Id`, `ChatName`, `UserName`, `Text`) VALUES
+(1, 'test', 'test', 'Пользователь test Начал чат'),
+(2, 'test', 'test', 'Тестовое сообщение'),
+(3, 'test', 'test', 'Тестовое сообщение'),
+(4, 'test', 'test', '1234'),
+(5, 'test', 'test', 'hhslkdfjbglksjdbgf'),
+(6, 'test', 'test', 'jjjjjj'),
+(7, 'test', 'test', 'asdfasdf asdf as'),
+(8, 'test', 'test', 'fg sfd g'),
+(9, 'test', 'test', 'afsd asdf'),
+(10, 'test', 'test', 'tttt'),
+(11, 'test', 'test', ' dsa sadf'),
+(12, 'test', 'test', 'asdf asdf '),
+(13, 'test', 'test', 'test ????'),
+(14, 'test', 'test', 'test ????????'),
+(15, 'test', 'test', '????');
 
 -- --------------------------------------------------------
 
@@ -47,6 +81,28 @@ INSERT INTO `comments` (`Id`, `Module`, `Record`, `UserName`, `UserId`, `Coment`
 (2, 'news', 2, 'test', 1, 'Мой первый комментарий', '2020-04-11 07:45:16'),
 (3, 'news', 2, 'test', 1, 'Это плохая новость', '2020-04-11 07:45:31'),
 (4, 'news', 1, 'test', 1, 'Это комментарий', '2020-04-11 08:13:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `Id` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
+  `Module` varchar(50) NOT NULL,
+  `ModuleId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`Id`, `UserID`, `Module`, `ModuleId`) VALUES
+(1, 1, 'news', 1),
+(2, 1, 'news', 2),
+(3, 1, 'comment', 4);
 
 -- --------------------------------------------------------
 
@@ -106,6 +162,23 @@ CREATE TABLE `subscribes` (
   `UserID` int(11) NOT NULL,
   `EMail` varchar(100) NOT NULL,
   `CategoryId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tovar`
+--
+
+CREATE TABLE `tovar` (
+  `Id` int(11) NOT NULL,
+  `Title` varchar(100) NOT NULL,
+  `Description` text NOT NULL,
+  `Price` int(11) NOT NULL,
+  `Type` varchar(100) NOT NULL,
+  `IsPresent` tinyint(1) NOT NULL,
+  `Pictures` text NOT NULL,
+  `BuyDiscount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -184,14 +257,36 @@ CREATE TABLE `votequestions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Dumping data for table `votequestions`
+--
+
+INSERT INTO `votequestions` (`Id`, `VoteId`, `Title`, `Text`) VALUES
+(1, 1, 'test asdf', '<p>test asdfadsf</p>\r\n');
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `allchat`
+--
+ALTER TABLE `allchat`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `ChatName` (`ChatName`);
 
 --
 -- Indexes for table `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `UserID` (`UserID`),
+  ADD KEY `Module` (`Module`);
 
 --
 -- Indexes for table `news`
@@ -214,6 +309,12 @@ ALTER TABLE `subscribes`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `UserID` (`UserID`),
   ADD KEY `CategoryId` (`CategoryId`);
+
+--
+-- Indexes for table `tovar`
+--
+ALTER TABLE `tovar`
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `users`
@@ -248,10 +349,22 @@ ALTER TABLE `votequestions`
 --
 
 --
+-- AUTO_INCREMENT for table `allchat`
+--
+ALTER TABLE `allchat`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -269,6 +382,12 @@ ALTER TABLE `newscategoryes`
 -- AUTO_INCREMENT for table `subscribes`
 --
 ALTER TABLE `subscribes`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tovar`
+--
+ALTER TABLE `tovar`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -293,7 +412,7 @@ ALTER TABLE `voteanswers`
 -- AUTO_INCREMENT for table `votequestions`
 --
 ALTER TABLE `votequestions`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
