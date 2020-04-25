@@ -32,6 +32,7 @@ class admintovarController extends baseController {
             "Id" => 0,
             "Title" => "",
             "Description" => "",
+            "ShortDescription" => "",
             "Price" => 0,
             "Type" => "",
             "IsPresent" => 0,
@@ -57,7 +58,13 @@ class admintovarController extends baseController {
         if (isset($_POST["Id"])) {
             //Копируем все поля из запроса
             $item = $_POST;
-            $item["Pictures"] = "";
+
+            foreach ($_FILES as $file) {
+                if ($file["error"] != 0 || $file["size"] == 0) continue;
+
+                $item["Pictures"] = uniqid() . ".jpg";
+                move_uploaded_file($file["tmp_name"], PATH . "content/img/" . $item["Pictures"]);
+            }
 
             //Проверить новый товар или нет
             if ($item["Id"] == 0) {
@@ -65,6 +72,7 @@ class admintovarController extends baseController {
                 InsertIntoDB("INSERT INTO `tovar` (
                                     `Id`,
                                     `Title`,
+                                    `ShortDescription`,
                                     `Description`,
                                     `Price`,
                                     `Type`,
@@ -74,6 +82,7 @@ class admintovarController extends baseController {
                                 ) VALUES (
                                     :Id,
                                     :Title,
+                                    :ShortDescription,
                                     :Description,
                                     :Price,
                                     :Type,
@@ -84,6 +93,7 @@ class admintovarController extends baseController {
             } else { 
                 UpdateIntoDB("UPDATE `tovar` SET
                                 `Title` = :Title,
+                                `ShortDescription` = :ShortDescription,
                                 `Description` = :Description,
                                 `Price` = :Price,
                                 `Type` = :Type,

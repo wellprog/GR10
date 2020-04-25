@@ -11,6 +11,7 @@
 
                 <form method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="Id" value="<?= $MODEL["Tovar"]["Id"] ?>" />
+                    <input type="hidden" name="Pictures" value="<?= $MODEL["Tovar"]["Pictures"] ?>" />
                     <table class="table">
                         <tr>
                             <th>Наименование</th>
@@ -19,11 +20,21 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>Краткое Описание</th>
+                            <td>
+                                <textarea name="ShortDescription"><?= $MODEL["Tovar"]["ShortDescription"] ?></textarea>
+                                <script>
+                                    CKEDITOR.replace('ShortDescription');
+                                </script>
+                            </td>
+                        </tr>
+
+                        <tr>
                             <th>Описание</th>
                             <td>
                                 <textarea name="Description"><?= $MODEL["Tovar"]["Description"] ?></textarea>
                                 <script>
-                                    CKEDITOR.replace('short_text');
+                                    CKEDITOR.replace('Description');
                                 </script>
                             </td>
                         </tr>
@@ -60,7 +71,8 @@
                         <tr>
                             <th>Главное фото</th>
                             <td>
-                                <input type="file" name="main_photo" />
+                                <img id="main_img" src="/content/img/<?= $MODEL["Tovar"]["Pictures"] ?>" style="max-width:300px;" />
+                                <input id="main_img_upload" type="file" name="main_photo" onchange="readURL(this);" />
                             </td>
                         </tr>
 
@@ -72,3 +84,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#main_img').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+</script>

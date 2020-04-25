@@ -5,7 +5,7 @@
 
 
                 <div>
-                    <h1>Категории новостей</h1>
+                    <h1>Товары</h1>
                     <table class="table">
                         <thead>
                             <tr>
