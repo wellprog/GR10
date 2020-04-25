@@ -29,6 +29,10 @@
                     <a href="/user/logout">Выход</a>
                 </div>
 
+                <div class="admin-main-menu">
+                    <a href="/adminmusic/">Музыка</a>
+                </div>
+
 
             </div>
         </div>

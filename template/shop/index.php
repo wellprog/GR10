@@ -34,9 +34,9 @@
 
                         </div>
 
-                        <div class="reset_btn">
+                        <!-- <div class="reset_btn">
                             <button class="boxed-btn4" type="submit">Reset</button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
