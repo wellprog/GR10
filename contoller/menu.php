@@ -17,6 +17,7 @@ class menuController extends baseController {
             $menu["Регистрация"] = "/user/register";
         } else {
             $menu["Выход"] = "/user/logout";
+            $menu["Персональная страница"] = "/user/personal";
             if ($currentUser["IsAdmin"] == 1) {
                 $menu["Админка"] = "/admin";
             }
@@ -24,6 +25,19 @@ class menuController extends baseController {
 
         return $this->Partial($menu);
 
+    }
+
+    public function user_pages($params) {
+        
+        $items = GetAllFromDB("SELECT * FROM `personalpages` as p LEFT JOIN `users` as u on p.UserId = u.Id WHERE p.IsActive = 1");
+
+        $menu = [];
+
+        foreach ($items as $v) {
+            $menu[$v["Login"]] = "/user/userpage/" . $v["UserID"];
+        }
+
+        return $this->Partial($menu, "user_menu");
     }
 
 }

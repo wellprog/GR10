@@ -99,4 +99,62 @@ class userController extends baseController {
         ]);   
     }
 
+    public function personal($params) {
+
+        //Получаем текущего пользователя
+        $user = GetUser();
+
+        if ($user == null)
+            return $this->RedirectRaw("/");
+
+
+        //Создаем шаблон страницы
+        $item = [
+            "Id" => 0,
+            "UserID" => $user["Id"],
+            "Text" => "",
+            "IsActive" => 0 
+        ];
+
+        //Пытаемся достать страницу из базы
+        $tmp = GetFirstFromDB("SELECT * FROM `personalpages` WHERE `UserID` = :UserID", ["UserID" => $user["Id"]]);
+        if ($tmp !== false)
+            $item = $tmp;
+
+        if (isset($_POST["Id"])) {
+            $item = $this->savePersonal($user, $_POST);
+        }
+        
+        return $this->Page([
+            "user" => $user,
+            "item" => $item
+        ]);
+    }
+
+    private function savePersonal($user, $request) {
+        if ($user["Id"] != $request["UserId"])
+            return;
+
+        return $this->InsertOrUpdate("personalpages", $request);
+    }
+
+    public function userpage($params)
+    {
+        if (count($params) == 0)
+            return $this->RedirectRaw("/");
+
+        $id = $params[0];
+
+        $user = GetFirstFromDB("SELECT * FROM `users` WHERE Id = :id", ["id" => $id]);
+        $item = GetFirstFromDB("SELECT * FROM `personalpages` WHERE UserID = :id", ["id" => $id]);
+
+        if ($user === false || $item === false || $item["IsActive"] == 0)
+            return $this->RedirectRaw("/");
+
+        return $this->Page([
+            "user" => $user,
+            "item" => $item
+        ]);
+    }
+
 }

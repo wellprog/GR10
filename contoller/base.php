@@ -61,4 +61,55 @@ class baseController {
     protected function RedirectRaw($url) {
         header("Location: " . $url);
     }
+
+
+    protected function InsertOrUpdate($tableName, $model, $idName = "Id") {
+        //Проверка на то что делать
+        if ($model[$idName] == 0) {
+            $model[$idName] = $this->Insert($tableName, $model, $idName);
+            return $model;
+        } else {
+            $this->Update($tableName, $model, $idName);
+            return $model;
+        }
+    }
+
+    protected function Insert($tableName, $model, $idName = "Id") {
+        $fields = [];
+        $values = [];
+        $params = [];
+
+        foreach($model as $k => $v) {
+            if ($k == $idName) continue;
+
+            $fields[] = "`$k`";
+            $values[] = ":$k";
+
+            $params[$k] = $v;
+        }
+
+        $sqlFields = implode(",", $fields);
+        $sqlValues = implode(",", $values);
+
+        $sql = "INSERT INTO `$tableName`($sqlFields) VALUES ($sqlValues)";
+        InsertIntoDB($sql, $params);
+    } 
+
+    protected function Update($tableName, $model, $idName = "Id") {
+        $fields = [];
+        $params = [];
+
+        foreach($model as $k => $v) {
+            if ($k != $idName) {
+                $fields[] = "`$k` = :$k";
+            }
+            
+            $params[$k] = $v;
+        }
+
+        $sqlFields = implode(",", $fields);
+
+        $sql = "UPDATE `$tableName` SET $sqlFields WHERE `$idName` = :$idName";
+        UpdateIntoDB($sql, $params);
+    }
 } 
