@@ -43,7 +43,8 @@ class chatController extends baseController {
         $messages = GetAllFromDB("SELECT * FROM `allchat` WHERE `ChatName` = :ChatName", ["ChatName" => $params[0]]);
 
         return $this->Page([
-            "Messages" => $messages
+            "Messages" => $messages,
+            "room" => $params[0]
         ]);
     }
 

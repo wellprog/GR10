@@ -30,11 +30,9 @@
                     <?php 
                     
                     $id = 0;
-                    $room = ""; 
                     foreach ($MODEL["Messages"] as $v):
                         $id = $v["Id"];
-                        $room = $v["ChatName"] 
-                ?>
+                    ?>
                     <tr>
                         <th><?= $v["UserName"] ?></th>
                         <td><?= $v["Text"] ?></td>
@@ -88,7 +86,7 @@
 
 
     id = <?= $id ?>;
-    room =  "<?= urlencode($room)  ?>";
+    room =  "<?= urlencode($MODEL["room"])  ?>";
 
     function Send() {
         text = $("#TextMessage").val();
