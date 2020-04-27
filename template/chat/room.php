@@ -88,7 +88,7 @@
 
 
     id = <?= $id ?>;
-    room = "<?= $room  ?>";
+    room =  "<?= urlencode($room)  ?>";
 
     function Send() {
         text = $("#TextMessage").val();
