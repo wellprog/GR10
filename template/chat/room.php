@@ -108,7 +108,7 @@
     function draw(data) {
         table = $("#messagetable");
 
-        alert(data);
+        // alert(data);
 
         // for (var i = 0; i < data.length; i++) {
         //     var el = data[i];
