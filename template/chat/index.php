@@ -13,7 +13,7 @@
                         <?php foreach($MODEL["Rooms"] as $v): ?>
                             <tr>
                                 <th><?= $v["ChatName"] ?></th>
-                                <td><a class="" href="/chat/room/<?= $v["ChatName"] ?>">Перейти</a></td>
+                                <td><a class="" href="/chat/room/<?= urlencode($v["ChatName"]) ?>">Перейти</a></td>
                             </tr>
                         <?php endforeach; ?>
 
