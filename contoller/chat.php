@@ -38,13 +38,17 @@ class chatController extends baseController {
     public function room($params) {
         if (count($params) < 1) {
             return $this->Redirect("index");
+
+            
         }
 
-        $messages = GetAllFromDB("SELECT * FROM `allchat` WHERE `ChatName` = :ChatName", ["ChatName" => $params[0]]);
+        $room = urldecode($params[0]);
+
+        $messages = GetAllFromDB("SELECT * FROM `allchat` WHERE `ChatName` = :ChatName", ["ChatName" => $room]);
 
         return $this->Page([
             "Messages" => $messages,
-            "room" => $params[0]
+            "room" => $room
         ]);
     }
 
@@ -54,7 +58,7 @@ class chatController extends baseController {
         }
 
         $user = GetUser();
-        $room = $params[0];
+        $room = urldecode($params[0]);
         $text = $_POST["Text"];
 
         $id = InsertIntoDB("INSERT INTO `allchat` (`ChatName`, `UserName`, `Text`) 
@@ -72,7 +76,7 @@ class chatController extends baseController {
             return $this->Redirect("index");
         }
 
-        $room = $params[0];
+        $room = urldecode($params[0]);
         $lastid = $params[1];
 
         $messages = GetAllFromDB("SELECT * FROM `allchat` WHERE `ChatName` = :ChatName AND `Id` > :Id", [
