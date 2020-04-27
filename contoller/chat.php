@@ -38,8 +38,6 @@ class chatController extends baseController {
     public function room($params) {
         if (count($params) < 1) {
             return $this->Redirect("index");
-
-            
         }
 
         $room = urldecode($params[0]);
