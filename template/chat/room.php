@@ -108,11 +108,13 @@
     function draw(data) {
         table = $("#messagetable");
 
-        for (var i = 0; i < data.length; i++) {
-            var el = data[i];
+        alert(data);
 
-            table.append("<tr><th>" + el.UserName + "</th><td>" + el.Text + "</td></tr>");
-            id = el.Id;
-        }
+        // for (var i = 0; i < data.length; i++) {
+        //     var el = data[i];
+
+        //     table.append("<tr><th>" + el.UserName + "</th><td>" + el.Text + "</td></tr>");
+        //     id = el.Id;
+        // }
     }
 </script>
