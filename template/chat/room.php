@@ -108,11 +108,11 @@
 
         // alert(data);
 
-        // for (var i = 0; i < data.length; i++) {
-        //     var el = data[i];
+        for (var i = 0; i < data.length; i++) {
+            var el = data[i];
 
-        //     table.append("<tr><th>" + el.UserName + "</th><td>" + el.Text + "</td></tr>");
-        //     id = el.Id;
-        // }
+            table.append("<tr><th>" + el.UserName + "</th><td>" + el.Text + "</td></tr>");
+            id = el.Id;
+        }
     }
 </script>
