@@ -270,7 +270,7 @@
                 <div class="example">
                     <ul class="playlist">
                         <?php foreach($MODEL["items"] as $v): ?>
-                        <li data-cover="http://digital.akauk.com/utils/musicPlayer/data/John-Wesley.jpg" data-artist="<?= $v["Autor"] ?>"><a href="<?= $v["File"] ?>"><?= $v["Title"] ?></a></li>
+                        <li data-cover="http://digital.akauk.com/utils/musicPlayer/data/John-Wesley.jpg" data-artist="<?= $v["Autor"] ?>"><a href="/content/music/<?= $v["File"] ?>"><?= $v["Title"] ?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
