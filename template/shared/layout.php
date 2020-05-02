@@ -67,6 +67,7 @@
                                                 <ul class="submenu">
                                                     <li><a href="/revert">Перевернуть слова</a></li>
                                                     <li><a href="/chat">Чат</a></li>
+                                                    <li><a href="/music">Музыка</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="#">Пользователь <i class="ti-angle-down"></i></a>
